@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, redirect, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
 app.config["SECRET_KEY"] = "you_will_never_guess_this"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///books.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -10,7 +11,7 @@ db = SQLAlchemy(app)
 
 
 class Book(db.Model):
-    # __tablename__ = "BOOKS"
+    # __tablename__ = "Book"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(250), unique=True, nullable=False)
     author = db.Column(db.String(250), nullable=False)
@@ -66,13 +67,19 @@ def delete():
 @app.route("/edit", methods=["GET", "POST"])
 def edit():
     if request.method == "POST":
-        # UPDATE RECORD
+        # UPDATE RECORD BY ID
         book_id = request.args.get("b_id")
         book_to_update = Book.query.get(book_id)
         new_rating = request.form["rating"]
+        new_title = request.form["title"]
+        new_url = request.form["url"]
+        new_author = request.form["author"]
         try:
             float(new_rating)
             book_to_update.rating = new_rating
+            book_to_update.author = new_author
+            book_to_update.url = new_url
+            book_to_update.title = new_title
             db.session.commit()
             return redirect(url_for("index"))
         except ValueError:

@@ -19,7 +19,7 @@
     <div class="card-footer">
         <ul class="nav nav-pills card-header-pills ps-4 py-1 d-grid gap-4 d-md-flex">
           <li>
-            <a class="btn btn-primary" href="https://amazon.com/" role="button">Go to Url</a>
+            <a class="btn btn-primary" href="{{book['url']}}" role="button">Go to Url</a>
           </li>
           <li>
               <a class="btn btn-secondary" href="{{url_for('edit', b_id=book['id'])}}" role="button">Edit</a>
