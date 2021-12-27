@@ -1,0 +1,73 @@
+{% extends "base.html" %} {%block content %}
+
+<div class="container py-4" style="width: 42rem">
+  {% if get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{get_flashed_messages()[0]}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endif %} 
+  <div class="card border-bottom shadow my-5 bg-body rounded">
+    <h5 class="card-header px-4 py-3">Create a new book entry</h5>
+    <div class="card-body px-4">
+      <form
+        class="d-grid gap-5 my-lg-3"
+        action= {{url_for('create_book')}}
+        method="POST"
+      >
+        <div class="form-floating text-muted">
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            placeholder="Title"
+            value="{{title}}"
+            required
+          />
+          <label for="floatingInput" class="form-label">Title</label>
+        </div>
+        <div class="form-floating text-muted">
+          <input
+            type="text"
+            class="form-control"
+            name="author"
+            placeholder="Author"
+            value="{{author}}"
+            required
+          />
+          <label for="floatingInput">Author</label>
+        </div>
+        <div class="form-floating text-muted">
+          <input
+            type="text"
+            class="form-control"
+            name="rating"
+            placeholder="Rating"
+            
+            required
+          />
+          <label for="floatingInput text-muted">Rating</label>
+        </div>
+        <div class="form-floating text-muted">
+          <input
+            type="text"
+            class="form-control"
+            name="url"
+            placeholder="Url"
+            value="{{url}}"
+            required
+          />
+          <label for="floatingInput">Url</label>
+        </div>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-end mb-lg-0">
+          <button class="btn btn-primary" type="submit">Create</button>
+          <a href="{{url_for('reset')}}" class="btn btn-outline-danger">Reset</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

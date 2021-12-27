@@ -1,0 +1,80 @@
+{% extends "base.html" %} {%block content %}
+
+<div class="container py-4" style="width: 42rem">
+  {% if get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{get_flashed_messages()[0]}}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endif %}
+  <div class="card border-bottom shadow my-5 bg-body rounded">
+    <h5 class="card-header px-4 py-3">Edit a book entry</h5>
+    <div class="card-body px-4">
+      <form
+        class="d-grid gap-5 my-lg-3"
+        action="{{url_for('edit', b_id=book['id'])}}"
+        method="POST"
+      >
+        <div class="form-floating text-muted">
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            placeholder="Title"
+            value="{{book['title']}}"
+            required
+          />
+          <label for="floatingInput" class="form-label">Title</label>
+        </div>
+        <div class="form-floating text-muted">
+          <input
+            type="text"
+            class="form-control"
+            name="author"
+            placeholder="Author"
+            value="{{book['author']}}"
+            required
+          />
+          <label for="floatingInput">Author</label>
+        </div>
+        <div class="form-floating text-muted">
+          <input
+            type="text"
+            class="form-control"
+            name="rating"
+            placeholder="Rating"
+            value="{{book['rating']}}"
+            required
+          />
+          <label for="floatingInput text-muted">Rating</label>
+        </div>
+        <div class="form-floating text-muted">
+          <input
+            type="text"
+            class="form-control"
+            name="url"
+            placeholder="Url"
+            value="{{book['url']}}"
+            required
+          />
+          <label for="floatingInput">Url</label>
+        </div>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-end mb-lg-0">
+          <button class="btn btn-primary" type="submit">Save changes</button>
+
+          <a class="btn btn-secondary" href="{{url_for('index')}}" role="button"
+            >Back</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
